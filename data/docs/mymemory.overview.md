@@ -10,3 +10,5 @@ Sistem memori lokal (knowledge graph) untuk asisten AI, diekspos sebagai MCP ser
 - Server: server.py (Python, mcp SDK 2.3 `MCPServer`, venv di .venv)
 - Tools: search, get_doc, list_docs, save_doc, append_doc, delete_doc, link, unlink, neighbors
 - Dibuat: 2026-10-30
+
+- Mulai dari catatan `index` untuk melihat semua dokumentasi dan rencana.
