@@ -10,3 +10,5 @@ updated: 2026-10-30
 - Sync: sync.sh (git add data, commit jika berubah, push ke origin main). Cron tiap 30 menit, log di sync.log.
 - Cron di WSL hanya jalan selama WSL hidup. Push via SSH; key berpassphrase bisa membuat push cron gagal (commit tetap lokal).
 - Setelah ubah registrasi, restart Claude Code agar tool memori termuat.
+
+- Update 2026-10-30: remote dipindah ke HTTPS (https://github.com/idsoke/mymemory-ai.git) dengan credential helper lokal `gh auth git-credential`, karena SSH key id_ed25519 berpassphrase dan tidak ada ssh-agent sehingga push dari cron gagal.
