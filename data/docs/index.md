@@ -12,7 +12,7 @@ Status: [x] sudah dibuat · [ ] rencana
 ## Sudah dibuat
 
 ### mymemory (sistem memori)
-- [x] mymemory.overview: apa itu mymemory-ai, lokasi, daftar tool
+- [x] mymemory.overview: apa itu odoo-mymemory-ai, lokasi, daftar tool
 - [x] mymemory.design: keputusan desain (teks, FTS, graph, alasan belum pakai vektor)
 - [x] mymemory.ops: registrasi MCP, sync/cron, catatan WSL, remote HTTPS
 
