@@ -15,4 +15,6 @@ updated: 2026-10-30
 
 - Update 2026-10-30: repo GitHub diganti nama menjadi idsoke/odoo-mymemory-ai; remote origin sekarang https://github.com/idsoke/odoo-mymemory-ai.git. Folder lokal tetap /home/idris/mymemory-ai (dipakai .venv, crontab, dan ~/.claude.json).
 
+- Update 2026-10-30: impor otomatis dokumentasi Odoo (opsi A). Sumber kebenaran = D:\dokumentasi\odoo\dokumentasi_*_odoo.md. sync.sh menjalankan import_docs.py dulu (pemetaan file → id di docs_import.json), lalu mirror dan commit. Catatan odoo.<modul>* jangan diedit lewat save_doc karena akan tertimpa impor berikutnya; edit file MD sumbernya. server.py me-refresh indeks FTS sebelum tiap search, jadi hasil impor langsung bisa dicari tanpa restart. Catatan index (daftar dokumentasi) tetap diperbarui manual.
+
 - Mirror Windows: sync.sh menyalin data/ ke /mnt/d/dokumentasi/odoo/mymemory (rsync --delete, hanya subfolder itu). Satu arah: edit di Windows akan tertimpa.
