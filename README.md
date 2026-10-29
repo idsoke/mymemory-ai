@@ -155,3 +155,7 @@ python3 tools/build_html.py dokumentasi_sales_odoo.md dokumentasi_sales_odoo.htm
 ```
 
 Then point `docs_import.json` at the output folder.
+
+## License
+
+[MIT](LICENSE).
