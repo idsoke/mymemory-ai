@@ -3,6 +3,14 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# Readable copy on Windows (D:\dokumentasi\odoo\mymemory). One-way mirror:
+# edits made there are overwritten; edit through the MCP tools instead.
+MIRROR=/mnt/d/dokumentasi/odoo/mymemory
+if [ -d "$(dirname "$MIRROR")" ]; then
+  mkdir -p "$MIRROR"
+  rsync -rt --delete data/ "$MIRROR/"
+fi
+
 git add data
 if ! git diff --cached --quiet; then
   git commit -q -m "memory: sync $(date '+%Y-%m-%d %H:%M')"
