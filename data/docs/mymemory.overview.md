@@ -12,3 +12,5 @@ Sistem memori lokal (knowledge graph) untuk asisten AI, diekspos sebagai MCP ser
 - Dibuat: 2026-10-30
 
 - Mulai dari catatan `index` untuk melihat semua dokumentasi dan rencana.
+
+- Update 2026-10-30: dipakai untuk dua proyek, odoo (odoo.workspace) dan nakama (nakama.workspace). Filter `project` di search memisahkan hasil.
