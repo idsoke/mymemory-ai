@@ -43,7 +43,7 @@ Tiap modul punya catatan ringkasan + catatan per bagian (`odoo.<modul>.NN-...`).
 - [ ] odoo.account.move: invoice/bill/jurnal (sebagian tercakup: odoo.accounting.03, odoo.accounting.04)
 
 ### odoo: alur bisnis
-- [ ] odoo.flow.sale-to-invoice: quotation → SO → delivery → invoice → payment (sebagian tercakup: odoo.sales.03, odoo.sales.04)
+- [ ] odoo.flow.sale-to-invoice: quotation → SO → delivery → invoice → payment (sebagian tercakup: odoo.sales.04, odoo.accounting.06)
 - [ ] odoo.flow.purchase-to-bill: RFQ → PO → receipt → vendor bill
 
 ### mymemory: pengembangan
