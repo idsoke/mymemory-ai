@@ -1,0 +1,21 @@
+{
+  "source_dir": "/mnt/d/dokumentasi/odoo",
+  "pattern": "dokumentasi_*_odoo.md",
+  "docs": {
+    "dokumentasi_crm_odoo.md": {"id": "odoo.crm", "label": "CRM", "tag": "crm"},
+    "dokumentasi_sales_odoo.md": {"id": "odoo.sales", "label": "Sales", "tag": "sales"},
+    "dokumentasi_pos_odoo.md": {"id": "odoo.pos", "label": "Point of Sale", "tag": "pos"},
+    "dokumentasi_pos_restaurant_odoo.md": {"id": "odoo.pos-restaurant", "label": "POS Restaurant", "tag": "pos-restaurant"},
+    "dokumentasi_purchase_odoo.md": {"id": "odoo.purchase", "label": "Purchase", "tag": "purchase"},
+    "dokumentasi_inventory_odoo.md": {"id": "odoo.inventory", "label": "Inventory", "tag": "inventory"},
+    "dokumentasi_accounting_odoo.md": {"id": "odoo.accounting", "label": "Accounting / Invoicing", "tag": "accounting"},
+    "dokumentasi_hr_odoo.md": {"id": "odoo.hr", "label": "HR", "tag": "hr"},
+    "dokumentasi_mrp_odoo.md": {"id": "odoo.mrp", "label": "Manufacturing", "tag": "mrp"},
+    "dokumentasi_project_odoo.md": {"id": "odoo.project", "label": "Project & Timesheet", "tag": "project"},
+    "dokumentasi_website_sale_odoo.md": {"id": "odoo.ecommerce", "label": "Website & eCommerce", "tag": "ecommerce"},
+    "dokumentasi_overview_odoo.md": {
+      "id": "odoo.overview", "label": "Gambaran Besar", "tag": "overview", "module": false,
+      "title": "Odoo 20.0 gambaran besar antar modul: ringkasan & daftar bagian"
+    }
+  }
+}

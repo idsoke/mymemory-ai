@@ -4,7 +4,8 @@ Source of truth is plain text under data/ (versioned in git):
   data/docs/<id>.md       one note per node, with a small "key: value" header
   data/relations.jsonl    one {"src", "rel", "dst"} edge per line, sorted
 
-index.db is a disposable SQLite FTS5 index rebuilt from data/ at startup.
+index.db is a disposable SQLite FTS5 index rebuilt from data/ at startup and
+refreshed before each search for notes changed outside the server (import_docs.py).
 """
 
 import datetime
@@ -73,7 +74,30 @@ def open_index() -> sqlite3.Connection:
     for path in DOCS.glob("*.md"):
         index_doc(db, path.stem, *read_doc(path))
     db.commit()
+    indexed_mtimes.update(doc_mtimes())
     return db
+
+
+# mtime of each note as last indexed, to spot edits made outside the server.
+indexed_mtimes: dict[str, int] = {}
+
+
+def doc_mtimes() -> dict[str, int]:
+    return {path.stem: path.stat().st_mtime_ns for path in DOCS.glob("*.md")}
+
+
+def refresh_index(db: sqlite3.Connection) -> None:
+    current = doc_mtimes()
+    if current == indexed_mtimes:
+        return
+    for id in indexed_mtimes.keys() - current.keys():
+        db.execute("DELETE FROM docs_fts WHERE id = ?", (id,))
+    for id, mtime in current.items():
+        if indexed_mtimes.get(id) != mtime:
+            index_doc(db, id, *read_doc(DOCS / f"{id}.md"))
+    db.commit()
+    indexed_mtimes.clear()
+    indexed_mtimes.update(current)
 
 
 def index_doc(db: sqlite3.Connection, id: str, meta: dict, body: str) -> None:
@@ -147,6 +171,7 @@ def search(query: str, limit: int = 8, project: str = "") -> list[dict]:
         "SELECT id, title, tags, snippet(docs_fts, 4, '[', ']', '…', 24) FROM docs_fts "
         "WHERE docs_fts MATCH ?" + (" AND project = ?" if project else "") + " ORDER BY rank LIMIT ?"
     )
+    refresh_index(db)
     for op in ("AND", "OR"):  # fall back to any-term match when all-terms finds nothing
         q = fts_query(query, op)
         if not q:
