@@ -12,3 +12,5 @@ updated: 2026-10-30
 - Setelah ubah registrasi, restart Claude Code agar tool memori termuat.
 
 - Update 2026-10-30: remote dipindah ke HTTPS (https://github.com/idsoke/mymemory-ai.git) dengan credential helper lokal `gh auth git-credential`, karena SSH key id_ed25519 berpassphrase dan tidak ada ssh-agent sehingga push dari cron gagal.
+
+- Mirror Windows: sync.sh menyalin data/ ke /mnt/d/dokumentasi/odoo/mymemory (rsync --delete, hanya subfolder itu). Satu arah: edit di Windows akan tertimpa.

@@ -19,6 +19,14 @@ Status: [x] sudah dibuat · [ ] rencana
 ### odoo
 - [x] odoo.workspace: lokasi source Odoo, folder skills/, konvensi id
 
+### Dokumentasi modul Odoo 20.0 (file di Windows, belum diimpor ke memori)
+Lokasi: D:\dokumentasi\odoo (WSL: /mnt/d/dokumentasi/odoo), masing-masing ada versi .md dan .html
+- [x] dokumentasi_sales_odoo: arsitektur, ERD, siklus Sales Order, alur end-to-end, CRM→Quotation
+- [x] dokumentasi_crm_odoo: arsitektur, ERD, siklus Lead→Opportunity→Won/Lost, sumber lead
+- [x] dokumentasi_inventory_odoo: lokasi/quant/move, ERD, warehouse, siklus transfer
+- [x] dokumentasi_accounting_odoo: ERD, move_type & jurnal, siklus invoice, payment_state
+- [x] dokumentasi_pos_odoo: backend↔frontend kasir, ERD, siklus pos.session & pos.order
+
 ## Rencana
 
 ### odoo: dasar & lingkungan
@@ -30,15 +38,18 @@ Status: [x] sudah dibuat · [ ] rencana
 ### odoo: model inti
 - [ ] odoo.res.partner: kontak/pelanggan/vendor
 - [ ] odoo.product: product.template vs product.product
-- [ ] odoo.sale.order: sales order dan state-nya
-- [ ] odoo.stock.picking: transfer gudang, stock.move
-- [ ] odoo.account.move: invoice/bill/jurnal
+- [ ] odoo.sale.order: sales order dan state-nya (sebagian ada di dokumentasi_sales_odoo)
+- [ ] odoo.stock.picking: transfer gudang, stock.move (sebagian ada di dokumentasi_inventory_odoo)
+- [ ] odoo.account.move: invoice/bill/jurnal (sebagian ada di dokumentasi_accounting_odoo)
 
 ### odoo: alur bisnis
-- [ ] odoo.flow.sale-to-invoice: quotation → SO → delivery → invoice → payment
+- [ ] odoo.flow.sale-to-invoice: quotation → SO → delivery → invoice → payment (sebagian ada di dokumentasi_sales_odoo)
 - [ ] odoo.flow.purchase-to-bill: RFQ → PO → receipt → vendor bill
 
 ### mymemory: pengembangan
 - [ ] mymemory.feature.autosave: hook Claude Code untuk simpan ringkasan otomatis
 - [ ] mymemory.feature.graph-view: export graph.html untuk visualisasi
 - [ ] mymemory.feature.vector: pencarian semantik (sqlite-vec + embedding lokal)
+
+## Kopian Windows
+Semua catatan memori dicerminkan otomatis oleh sync.sh ke D:\dokumentasi\odoo\mymemory (satu arah; jangan edit di sana).
