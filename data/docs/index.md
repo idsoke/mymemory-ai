@@ -19,13 +19,13 @@ Status: [x] sudah dibuat · [ ] rencana
 ### odoo
 - [x] odoo.workspace: lokasi source Odoo, folder skills/, konvensi id
 
-### Dokumentasi modul Odoo 20.0 (file di Windows, belum diimpor ke memori)
-Lokasi: D:\dokumentasi\odoo (WSL: /mnt/d/dokumentasi/odoo), masing-masing ada versi .md dan .html
-- [x] dokumentasi_sales_odoo: arsitektur, ERD, siklus Sales Order, alur end-to-end, CRM→Quotation
-- [x] dokumentasi_crm_odoo: arsitektur, ERD, siklus Lead→Opportunity→Won/Lost, sumber lead
-- [x] dokumentasi_inventory_odoo: lokasi/quant/move, ERD, warehouse, siklus transfer
-- [x] dokumentasi_accounting_odoo: ERD, move_type & jurnal, siklus invoice, payment_state
-- [x] dokumentasi_pos_odoo: backend↔frontend kasir, ERD, siklus pos.session & pos.order
+### Modul Odoo 20.0 (diimpor dari D:\dokumentasi\odoo, 2026-10-30)
+Tiap modul punya catatan ringkasan + catatan per bagian (`odoo.<modul>.NN-...`). Buka catatan modul untuk daftar bagiannya.
+- [x] odoo.sales: Sales (11 bagian)
+- [x] odoo.crm: CRM (11 bagian)
+- [x] odoo.inventory: Inventory (13 bagian)
+- [x] odoo.accounting: Accounting / Invoicing (14 bagian)
+- [x] odoo.pos: Point of Sale (13 bagian)
 
 ## Rencana
 
@@ -38,12 +38,12 @@ Lokasi: D:\dokumentasi\odoo (WSL: /mnt/d/dokumentasi/odoo), masing-masing ada ve
 ### odoo: model inti
 - [ ] odoo.res.partner: kontak/pelanggan/vendor
 - [ ] odoo.product: product.template vs product.product
-- [ ] odoo.sale.order: sales order dan state-nya (sebagian ada di dokumentasi_sales_odoo)
-- [ ] odoo.stock.picking: transfer gudang, stock.move (sebagian ada di dokumentasi_inventory_odoo)
-- [ ] odoo.account.move: invoice/bill/jurnal (sebagian ada di dokumentasi_accounting_odoo)
+- [ ] odoo.sale.order: sales order dan state-nya (sebagian tercakup: odoo.sales.03, odoo.sales.04)
+- [ ] odoo.stock.picking: transfer gudang, stock.move (sebagian tercakup: odoo.inventory.05, odoo.inventory.06)
+- [ ] odoo.account.move: invoice/bill/jurnal (sebagian tercakup: odoo.accounting.03, odoo.accounting.04)
 
 ### odoo: alur bisnis
-- [ ] odoo.flow.sale-to-invoice: quotation → SO → delivery → invoice → payment (sebagian ada di dokumentasi_sales_odoo)
+- [ ] odoo.flow.sale-to-invoice: quotation → SO → delivery → invoice → payment (sebagian tercakup: odoo.sales.03, odoo.sales.04)
 - [ ] odoo.flow.purchase-to-bill: RFQ → PO → receipt → vendor bill
 
 ### mymemory: pengembangan
