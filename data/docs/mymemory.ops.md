@@ -1,5 +1,5 @@
 ---
-title: Operasional odoo-mymemory-ai (sync, config, catatan WSL)
+title: Operasional mymemory-ai (sync, config, catatan WSL)
 tags: mymemory,ops,wsl,cron
 project: mymemory
 updated: 2026-10-30
@@ -21,4 +21,4 @@ updated: 2026-10-30
 
 - Update 2026-10-30: multi-proyek (Odoo + Nakama). docs_import.json sekarang punya daftar "sources" (per sumber: source_dir, pattern, project, title_prefix, sections "numbered" untuk `## N. Judul` atau "h2" untuk semua `## `, workspace + relasi) dan "mirrors". Nakama: D:\dokumentasi\nakama\*.md (kecuali README.md) → nakama.<dok>, relasi nakama.workspace --punya_dokumen-->. `import_docs.py --only nakama` untuk satu sumber.
 - Mirror sekarang lewat mirror.py (bukan rsync): per folder hanya project yang dipilih. D:\dokumentasi\odoo\mymemory = semua kecuali project nakama; D:\dokumentasi\nakama\mymemory = project nakama + meta (index). Satu arah; MYMEMORY_MIRROR= (kosong) mematikan semua mirror.
-- Rencana 2026-10-30: repo diganti nama kembali ke idsoke/mymemory-ai karena tidak lagi khusus Odoo (menunggu user menjalankan rename; GitHub me-redirect nama lama).
+- Update 2026-10-30: repo diganti nama kembali ke idsoke/mymemory-ai karena tidak lagi khusus Odoo. Remote origin: https://github.com/idsoke/mymemory-ai.git (nama lama odoo-mymemory-ai tetap di-redirect GitHub). Folder lokal tetap /home/idris/mymemory-ai.

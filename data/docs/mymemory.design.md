@@ -1,5 +1,5 @@
 ---
-title: Keputusan desain odoo-mymemory-ai
+title: Keputusan desain mymemory-ai
 tags: mymemory,design
 project: mymemory
 updated: 2026-10-30
