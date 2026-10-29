@@ -1,4 +1,4 @@
-# odoo-mymemory-ai
+# mymemory-ai
 
 A small, local **knowledge-graph memory for AI coding assistants**, exposed as an
 [MCP](https://modelcontextprotocol.io) server. Notes are plain Markdown files in git,
@@ -6,8 +6,10 @@ relations between notes form a graph, and SQLite FTS5 provides full-text search.
 Any MCP client (Claude Code, Claude Desktop, …) can search it before exploring a
 codebase and save what it learned afterwards, so knowledge survives across sessions.
 
-This repository is the author's working instance, used for Odoo 20.0 module
-documentation (notes are in Indonesian). The code itself is project-agnostic.
+This repository is the author's working instance, shared by two projects: Odoo 20.0
+module documentation (`project: odoo`) and the Nakama agent platform (`project: nakama`).
+Notes are in Indonesian. The code itself is project-agnostic; pass `project` to
+`search` to keep results apart.
 
 ## Why
 
@@ -65,7 +67,7 @@ Ids are stable, dotted names such as `odoo.sales` or `odoo.sales.03-siklus-hidup
 Requires Python 3.12+ and [uv](https://docs.astral.sh/uv/) (or plain `pip`).
 
 ```bash
-git clone https://github.com/idsoke/odoo-mymemory-ai.git ~/mymemory-ai
+git clone https://github.com/idsoke/mymemory-ai.git ~/mymemory-ai
 cd ~/mymemory-ai
 uv venv .venv && uv pip install --python .venv/bin/python -r requirements.txt
 ```
@@ -88,33 +90,55 @@ or point it at your own docs (see below).
 If you already keep documentation as Markdown files elsewhere, you can make that
 folder the single source of truth and import it automatically. `import_docs.py`:
 
-- splits each source file into one summary note (`<id>`) plus one note per
-  `## N. Heading` section (`<id>.NN-<slug>`);
+- splits each source file into one summary note (`<id>`) plus one note per section
+  (`<id>.NN-<slug>`): `"sections": "numbered"` uses `## N. Heading` lines, `"h2"` uses
+  every `## ` heading outside code fences, numbered in order;
 - rewrites only notes whose content changed (so periodic runs do not create empty commits);
 - deletes notes for sections removed from the source; when a section was only renamed
   (same number), hand-made relations move to the new note;
-- keeps the structural relations in sync (`index --berisi-->`, `odoo.workspace --punya_modul-->`,
+- keeps the structural relations in sync (`index --berisi-->`, `<workspace> --<workspace_rel>-->`,
   `<id> --punya_bagian--> <section>`).
 
-Configure it in `docs_import.json`:
+Configure one entry per project in `docs_import.json` (abridged):
 
 ```json
 {
-  "source_dir": "/mnt/d/dokumentasi/odoo",
-  "pattern": "dokumentasi_*_odoo.md",
-  "docs": {
-    "dokumentasi_sales_odoo.md": {"id": "odoo.sales", "label": "Sales", "tag": "sales"},
-    "dokumentasi_overview_odoo.md": {"id": "odoo.overview", "label": "Overview", "tag": "overview",
-                                     "module": false, "title": "Custom summary title"}
-  }
+  "sources": [
+    {
+      "name": "odoo", "project": "odoo", "title_prefix": "Odoo",
+      "source_dir": "/mnt/d/dokumentasi/odoo", "windows_dir": "D:\\dokumentasi\\odoo",
+      "pattern": "dokumentasi_*_odoo.md", "key_regex": "dokumentasi_(.+)_odoo\\.md",
+      "sections": "numbered", "html": true,
+      "summary_title": "{prefix} {label} (modul): ringkasan & daftar bagian",
+      "summary_tags": "{project},{tag},dokumentasi,modul",
+      "workspace": "odoo.workspace", "workspace_rel": "punya_modul",
+      "docs": {
+        "dokumentasi_sales_odoo.md": {"id": "odoo.sales", "label": "Sales", "tag": "sales"},
+        "dokumentasi_overview_odoo.md": {"id": "odoo.overview", "label": "Overview", "tag": "overview",
+                                         "module": false, "title": "Custom summary title"}
+      }
+    },
+    {
+      "name": "nakama", "project": "nakama", "title_prefix": "Nakama",
+      "source_dir": "/mnt/d/dokumentasi/nakama", "pattern": "*.md", "exclude": ["README.md"],
+      "sections": "h2", "workspace": "nakama.workspace", "workspace_rel": "punya_dokumen",
+      "docs": {"02-fitur-tersedia.md": {"id": "nakama.fitur", "label": "Fitur Tersedia", "tag": "fitur"}}
+    }
+  ],
+  "mirrors": [
+    {"dir": "/mnt/d/dokumentasi/odoo/mymemory", "exclude_projects": ["nakama"]},
+    {"dir": "/mnt/d/dokumentasi/nakama/mymemory", "projects": ["nakama", "meta"]}
+  ]
 }
 ```
 
-A matching file that is not listed gets an automatic `odoo.<name>` id. If
-`docs_import.json` or `source_dir` is missing, the import is skipped.
+A matching file that is not listed gets an automatic `<project>.<name>` id. If
+`docs_import.json` or a `source_dir` is missing, that import is skipped. The older
+single-source format (keys at the top level) is still read as one `odoo` source.
 
 ```bash
-.venv/bin/python import_docs.py --dry-run   # show what would change
+.venv/bin/python import_docs.py --dry-run        # show what would change
+.venv/bin/python import_docs.py --only nakama    # one source only
 .venv/bin/python import_docs.py
 ```
 
@@ -122,8 +146,8 @@ Imported notes are overwritten by the next import, so edit the source files, not
 
 ## Sync
 
-`sync.sh` runs the import, optionally mirrors `data/` to a readable folder
-(`MYMEMORY_MIRROR`, default `/mnt/d/dokumentasi/odoo/mymemory`; set it empty to
+`sync.sh` runs the import, then `mirror.py` copies each project's notes to its
+readable folder (`"mirrors"` in `docs_import.json`; set `MYMEMORY_MIRROR=` empty to
 disable; one-way, edits there are overwritten), then commits and pushes `data/`.
 Run it from cron, e.g. every 30 minutes:
 

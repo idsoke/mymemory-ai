@@ -3,18 +3,15 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# D:\dokumentasi\odoo\dokumentasi_*_odoo.md is the source of truth for the
-# Odoo module notes: refresh them first. A failed import must not stop the sync.
+# The docs listed in docs_import.json (D:\dokumentasi\odoo, D:\dokumentasi\nakama)
+# are the source of truth for their notes: refresh them first. A failed import
+# must not stop the sync.
 .venv/bin/python import_docs.py || echo "import_docs gagal (exit $?), sync tetap jalan"
 
-# Readable copy on Windows (D:\dokumentasi\odoo\mymemory). One-way mirror:
+# Readable per-project copies on Windows (docs_import.json "mirrors"). One-way:
 # edits made there are overwritten; edit the source docs or use the MCP tools.
-# Override with MYMEMORY_MIRROR=/some/dir, or set it empty to disable.
-MIRROR="${MYMEMORY_MIRROR-/mnt/d/dokumentasi/odoo/mymemory}"
-if [ -n "$MIRROR" ] && [ -d "$(dirname "$MIRROR")" ]; then
-  mkdir -p "$MIRROR"
-  rsync -rt --delete data/ "$MIRROR/"
-fi
+# Set MYMEMORY_MIRROR= (empty) to disable.
+.venv/bin/python mirror.py || echo "mirror gagal (exit $?), sync tetap jalan"
 
 git add data
 if ! git diff --cached --quiet; then

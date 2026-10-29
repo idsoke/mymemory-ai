@@ -1,4 +1,4 @@
-"""odoo-mymemory-ai: local knowledge-graph memory exposed over MCP.
+"""mymemory-ai: local knowledge-graph memory exposed over MCP.
 
 Source of truth is plain text under data/ (versioned in git):
   data/docs/<id>.md       one note per node, with a small "key: value" header
@@ -117,13 +117,14 @@ def fts_query(text: str, op: str) -> str:
 db = open_index()
 
 mcp = MCPServer(
-    "odoo-mymemory-ai",
+    "mymemory-ai",
     instructions=(
         "Persistent local memory (knowledge graph) shared across sessions. "
         "Before exploring a codebase or topic, call `search` to reuse what is already known. "
         "After learning something durable (how a module works, a decision, a gotcha), "
         "store it with `save_doc` and connect related nodes with `link`. "
-        "Use stable ids such as 'odoo.sale.order' or 'odoo.flow.invoice'. Keep notes concise."
+        "Use stable ids such as 'odoo.sale.order' or 'nakama.flow.chat', and pass `project` "
+        "(e.g. 'odoo', 'nakama') to search and save_doc to keep projects apart. Keep notes concise."
     ),
 )
 
