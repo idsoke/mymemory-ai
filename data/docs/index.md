@@ -26,6 +26,13 @@ Tiap modul punya catatan ringkasan + catatan per bagian (`odoo.<modul>.NN-...`).
 - [x] odoo.inventory: Inventory (13 bagian)
 - [x] odoo.accounting: Accounting / Invoicing (14 bagian)
 - [x] odoo.pos: Point of Sale (13 bagian)
+- [x] odoo.purchase: Purchase (11 bagian)
+- [x] odoo.pos-restaurant: POS Restaurant (11 bagian)
+- [x] odoo.hr: HR: Employees, Attendances, Time Off (14 bagian)
+- [x] odoo.mrp: Manufacturing (12 bagian)
+- [x] odoo.project: Project & Timesheet (11 bagian)
+- [x] odoo.ecommerce: Website & eCommerce (11 bagian)
+- [x] odoo.overview: gambaran besar & alur antar modul (10 bagian)
 
 ## Rencana
 
@@ -43,8 +50,8 @@ Tiap modul punya catatan ringkasan + catatan per bagian (`odoo.<modul>.NN-...`).
 - [ ] odoo.account.move: invoice/bill/jurnal (sebagian tercakup: odoo.accounting.03, odoo.accounting.04)
 
 ### odoo: alur bisnis
-- [ ] odoo.flow.sale-to-invoice: quotation → SO → delivery → invoice → payment (sebagian tercakup: odoo.sales.04, odoo.accounting.06)
-- [ ] odoo.flow.purchase-to-bill: RFQ → PO → receipt → vendor bill
+- [ ] odoo.flow.sale-to-invoice: quotation → SO → delivery → invoice → payment (sebagian tercakup: odoo.sales.04, odoo.accounting.06, odoo.overview.03)
+- [ ] odoo.flow.purchase-to-bill: RFQ → PO → receipt → vendor bill (sebagian tercakup: odoo.purchase.04, odoo.overview.04)
 
 ### mymemory: pengembangan
 - [ ] mymemory.feature.autosave: hook Claude Code untuk simpan ringkasan otomatis
