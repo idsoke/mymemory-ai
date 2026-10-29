@@ -1,0 +1,3 @@
+{"src": "mymemory.overview", "rel": "dijelaskan_oleh", "dst": "mymemory.design"}
+{"src": "mymemory.overview", "rel": "dioperasikan_lewat", "dst": "mymemory.ops"}
+{"src": "odoo.workspace", "rel": "didokumentasikan_di", "dst": "mymemory.overview"}
