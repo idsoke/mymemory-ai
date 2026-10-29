@@ -1,4 +1,6 @@
-# mymemory-ai
+# odoo-mymemory-ai
+
+GitHub: https://github.com/idsoke/odoo-mymemory-ai (private). Local checkout: `/home/idris/mymemory-ai`.
 
 Local knowledge-graph memory for AI assistants, exposed as an MCP server.
 

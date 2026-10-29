@@ -1,4 +1,4 @@
-"""mymemory-ai: local knowledge-graph memory exposed over MCP.
+"""odoo-mymemory-ai: local knowledge-graph memory exposed over MCP.
 
 Source of truth is plain text under data/ (versioned in git):
   data/docs/<id>.md       one note per node, with a small "key: value" header
@@ -93,7 +93,7 @@ def fts_query(text: str, op: str) -> str:
 db = open_index()
 
 mcp = MCPServer(
-    "mymemory-ai",
+    "odoo-mymemory-ai",
     instructions=(
         "Persistent local memory (knowledge graph) shared across sessions. "
         "Before exploring a codebase or topic, call `search` to reuse what is already known. "
